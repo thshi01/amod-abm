@@ -1,6 +1,6 @@
 .idea/
 lib/__pycache__/
-osrm-backend*
+osrm-backend-5.11.0/
 output/
 .DS_Store
 rl/__pycache__/

@@ -208,7 +208,7 @@ def anim(frames):
 	fig = plt.figure(figsize=(MAP_WIDTH, MAP_HEIGHT))
 	plt.xlim((Olng, Dlng))
 	plt.ylim((Olat, Dlat))
-	img = mpimg.imread(MAP_IMG_BOS)
+	img = mpimg.imread(MAP_IMG_HK)
 	plt.imshow(img, extent=[Olng, Dlng, Olat, Dlat], aspect=(Dlng-Olng)/(Dlat-Olat)*MAP_HEIGHT/MAP_WIDTH)
 	fig.subplots_adjust(left=0.00, bottom=0.00, right=1.00, top=1.00)
 	vehs = []

@@ -10,7 +10,7 @@ from lib.Env import *
 
 if __name__ == "__main__":
 	# path of the routing server
-	exe_loc = OSRM_LOC_523
+	exe_loc = OSRM_LOC
 	# path of the road network file that the routing server uses
 	map_loc = HK_LOC
 

@@ -41,10 +41,6 @@ class OsrmEngine(object):
         self.ghost = ghost
         self.gport = gport
         self.cst_speed = cst_speed
-        if exe_loc == OSRM_LOC_511:
-            self.version = OSRM_VER_511
-        else:
-            self.version = OSRM_VER_523
 
         # remove any open instance
         if self.check_server():
@@ -80,7 +76,7 @@ class OsrmEngine(object):
             output = p.communicate()[0].decode("utf-8")
         except FileNotFoundError:
             output = ""
-        if self.version not in str(output):
+        if OSRM_VER not in str(output):
             raise Exception("osrm does not have the right version")
         # check no running server
         if self.check_server():

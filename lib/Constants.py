@@ -82,15 +82,12 @@ Elat = 0.004
 
 # osrm map location
 BOS_LOC = "./osrm-backend-5.11.0/boston_massachusetts.osm.pbf"
-HK_LOC = "./osrm-backend-5.23.0/hong-kong_china.osm.pbf"
+HK_LOC = "./osrm-backend-5.11.0/hong-kong_china.osm.pbf"
 
 # osrm engine loc
-OSRM_LOC_511 = './osrm-backend-5.11.0/build/osrm-routed'
-OSRM_LOC_523 = './osrm-backend-5.23.0/build/osrm-routed'
-
-OSRM_VER_511 = "v5.11.0"
-OSRM_VER_523 = "v5.23.0"
+OSRM_LOC = './osrm-backend-5.11.0/build/osrm-routed'
+OSRM_VER = "v5.11.0"
 
 # animation map image location
-MAP_IMG_BOS = "map.png"
-MAP_IMG_HK = "hongkong.png"
+MAP_IMG_BOS = "./resource/map.png"
+MAP_IMG_HK = "./resource/hongkong.png"
