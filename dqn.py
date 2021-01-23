@@ -313,8 +313,8 @@ if __name__ == "__main__":
             dqn.compile(Adam(lr=0.001, epsilon=0.05, decay=0.0), metrics=['mae'])
 
             # dqn.fit(env, nb_steps=3000, action_repetition=1, visualize=False, verbose=2)
-            # dqn.save_weights('dqn_weights_%s.h5f' % (now), overwrite=True)
-            dqn.load_weights('dqn_weights_BAL5_150.h5f')
+            # dqn.save_weights('dqn_weights_%s.h5' % (now), overwrite=True)
+            dqn.load_weights('dqn_weights_BAL5_150.h5')
 
             # anime = anim(env.shots)
             # anime.save('test.mp4', dpi=300, fps=None, extra_args=['-vcodec', 'libx264'])

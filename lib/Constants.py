@@ -54,16 +54,22 @@ COEF_WAIT = 1.5
 COEF_INVEH = 1.0
 
 # map width and height
-MAP_WIDTH = 4.65
-MAP_HEIGHT = 4.23
+# MAP_WIDTH = 4.65
+# MAP_HEIGHT = 4.23
+MAP_WIDTH = 5.83
+MAP_HEIGHT = 4.47
 
 # coordinates
 # (Olng, Olat) lower left corner
-Olng = -71.13
-Olat = 42.345
+# Olng = -71.13
+# Olat = 42.345
+Olng = 114.167
+Olat = 22.298
 # (Dlng, Dlat) upper right corner
-Dlng = -71.07
-Dlat = 42.385
+# Dlng = -71.07
+# Dlat = 42.385
+Dlng = 114.177
+Dlat = 22.33
 # number of cells in the gridded map
 Nlng = 10
 Nlat = 10
@@ -73,3 +79,18 @@ Mlat = 5
 # length of edges of a cell
 Elng = 0.006
 Elat = 0.004
+
+# osrm map location
+BOS_LOC = "./osrm-backend-5.11.0/boston_massachusetts.osm.pbf"
+HK_LOC = "./osrm-backend-5.23.0/hong-kong_china.osm.pbf"
+
+# osrm engine loc
+OSRM_LOC_511 = './osrm-backend-5.11.0/build/osrm-routed'
+OSRM_LOC_523 = './osrm-backend-5.23.0/build/osrm-routed'
+
+OSRM_VER_511 = "v5.11.0"
+OSRM_VER_523 = "v5.23.0"
+
+# animation map image location
+MAP_IMG_BOS = "map.png"
+MAP_IMG_HK = "hongkong.png"

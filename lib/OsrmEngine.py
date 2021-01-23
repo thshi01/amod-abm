@@ -4,10 +4,12 @@ Open Source Routing Machine (OSRM)
 
 import os
 import requests
+import signal
 import json
 import time
 import math
 import numpy as np
+import psutil
 from subprocess import Popen, PIPE
 
 from lib.Constants import *
@@ -39,22 +41,35 @@ class OsrmEngine(object):
         self.ghost = ghost
         self.gport = gport
         self.cst_speed = cst_speed
+        if exe_loc == OSRM_LOC_511:
+            self.version = OSRM_VER_511
+        else:
+            self.version = OSRM_VER_523
+
         # remove any open instance
         if self.check_server():
             self.kill_server()
 
     # kill any routing server currently running before starting something new
     def kill_server(self):
-        Popen(["killall", os.path.basename(self.exe_loc)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        self.kill_process()
         time.sleep(2)
         print( "The routing server \"http://%s:%d\" is killed" % (self.ghost, self.gport) )
-        
+
+    def kill_process(self):
+        #Popen(["killall", os.path.basename(self.exe_loc)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        exec_name = os.path.basename(self.exe_loc)
+        for proc in psutil.process_iter(attrs=['pid', 'name']):
+            if exec_name in proc.info['name']:
+                proc.kill()
+
     # check if server is already running
     def check_server(self):
         try:
              if requests.get("http://%s:%d" % (self.ghost, self.gport)).status_code == 400:
                 return True
-        except requests.ConnectionError:
+        except Exception as err:
+            print(err)
             return False
     
     # start the routing server
@@ -65,19 +80,19 @@ class OsrmEngine(object):
             output = p.communicate()[0].decode("utf-8")
         except FileNotFoundError:
             output = ""
-        if "v5.11.0" not in str(output):
+        if self.version not in str(output):
             raise Exception("osrm does not have the right version")
         # check no running server
         if self.check_server():
             raise Exception("osrm-routed already running")
         # start server
-        p = Popen([self.exe_loc, self.map_loc], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-        time.sleep(2)
+        Popen([self.exe_loc, self.map_loc], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        time.sleep(5)
         if requests.get("http://%s:%d" % (self.ghost, self.gport)).status_code == 400:
             print( "The routing server \"http://%s:%d\" starts running" % (self.ghost, self.gport) )
         else:
             raise Exception("Map could not be loaded")
-    
+
     # restart the routing server        
     def restart_server(self):
         self.kill_server()
@@ -102,7 +117,6 @@ class OsrmEngine(object):
                     print("Error: %s" % (json_response['message']))
                     return (json_response, False)
             except requests.exceptions.Timeout:
-                print(url)
                 self.restart_server()
                 count += 1
             except Exception as err:
